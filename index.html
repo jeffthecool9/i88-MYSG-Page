@@ -1,0 +1,699 @@
+<!-- Replace MY_PAGE_URL and SG_PAGE_URL below to point to your regional destinations -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>i88 Official Updates Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #05070d;
+      --ink: #eef2fb;
+      --muted: #a1afc9;
+      --primary: #45d7ff;
+      --accent: #5b8bff;
+      --glass: rgba(255, 255, 255, 0.07);
+      --glass-strong: rgba(255, 255, 255, 0.12);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-soft: 0 24px 60px rgba(4, 10, 24, 0.6);
+      --shadow-card: 0 16px 40px rgba(4, 10, 24, 0.45);
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 32px;
+      --space-5: 40px;
+      --space-6: 48px;
+      --space-7: 56px;
+      --space-8: 64px;
+      --space-9: 72px;
+      --space-10: 80px;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(800px circle at 10% 10%, rgba(69, 215, 255, 0.22), transparent 60%),
+        radial-gradient(700px circle at 85% 15%, rgba(91, 139, 255, 0.22), transparent 55%),
+        linear-gradient(140deg, rgba(12, 19, 36, 0.95), rgba(4, 8, 16, 0.98));
+      transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0);
+      transition: transform 0.2s ease-out;
+    }
+
+    .motion-streaks {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: repeating-linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0.04) 0px,
+          rgba(255, 255, 255, 0.04) 1px,
+          transparent 1px,
+          transparent 44px
+        );
+      opacity: 0.35;
+    }
+
+    .particles {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.4), transparent 40%),
+        radial-gradient(1.5px 1.5px at 70% 20%, rgba(255, 255, 255, 0.4), transparent 45%),
+        radial-gradient(2px 2px at 85% 70%, rgba(255, 255, 255, 0.4), transparent 40%),
+        radial-gradient(1.5px 1.5px at 35% 80%, rgba(255, 255, 255, 0.35), transparent 45%);
+      opacity: 0.35;
+      animation: drift 16s linear infinite;
+    }
+
+    .noise {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 120px 120px;
+      opacity: 0.12;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    @keyframes drift {
+      0% {
+        transform: translateY(0px);
+      }
+      100% {
+        transform: translateY(80px);
+      }
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 7, 13, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-2) var(--space-3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.45em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-3);
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--ink);
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-3) var(--space-10);
+      display: grid;
+      gap: var(--space-8);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: var(--space-6);
+      align-items: center;
+    }
+
+    .hero-copy {
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1);
+    }
+
+    .badge {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.6rem, 4vw, 3.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    .hero-copy p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+    }
+
+    .mini-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-2);
+      margin-top: var(--space-2);
+    }
+
+    .mini-card {
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: grid;
+      gap: 6px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s ease, border 0.2s ease;
+    }
+
+    .mini-card:hover,
+    .mini-card:focus-within {
+      transform: translateY(-3px);
+      border-color: rgba(69, 215, 255, 0.4);
+    }
+
+    .mini-card span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .bulletin {
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      background: rgba(9, 16, 30, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .bulletin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 12px rgba(69, 215, 255, 0.8);
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.3);
+        opacity: 1;
+      }
+    }
+
+    .bulletin-lines {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      font-size: 0.95rem;
+    }
+
+    .bulletin-lines li {
+      color: var(--muted);
+    }
+
+    .bulletin-lines li.active {
+      color: var(--ink);
+    }
+
+    .cta-panel {
+      padding: var(--space-4);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(140deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      gap: var(--space-3);
+    }
+
+    .cta-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-2);
+    }
+
+    .cta {
+      position: relative;
+      display: grid;
+      gap: 4px;
+      padding: var(--space-3) var(--space-4);
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--primary), var(--accent));
+      color: #03111f;
+      font-weight: 600;
+      box-shadow: 0 18px 40px rgba(37, 140, 255, 0.35);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cta span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta small {
+      font-weight: 500;
+      font-size: 0.78rem;
+      opacity: 0.75;
+    }
+
+    .cta::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -30%;
+      width: 60%;
+      height: 220%;
+      background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.85) 45%,
+        rgba(255, 255, 255, 0) 70%
+      );
+      transform: translateX(-130%);
+      transition: transform 0.8s ease;
+    }
+
+    .cta:hover::after,
+    .cta:focus-visible::after {
+      transform: translateX(180%);
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 50px rgba(69, 215, 255, 0.4);
+    }
+
+    .cta:focus-visible {
+      outline: 2px solid rgba(69, 215, 255, 0.8);
+      outline-offset: 3px;
+    }
+
+    .cta-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: none;
+    }
+
+    .cta-secondary::after {
+      display: none;
+    }
+
+    .section {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .timeline {
+      display: grid;
+      gap: var(--space-3);
+      position: relative;
+      padding-left: var(--space-4);
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 6px;
+      bottom: 6px;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(69, 215, 255, 0.6), transparent);
+    }
+
+    .timeline-item {
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      background: rgba(7, 13, 26, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-card);
+      display: grid;
+      gap: 6px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .note {
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      background: rgba(8, 16, 30, 0.8);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .faq {
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    .faq details {
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      background: rgba(7, 13, 26, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .faq summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .faq p {
+      margin-top: var(--space-2);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--ink);
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding-top: var(--space-7);
+      }
+
+      .mini-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-row {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .particles {
+        animation: none;
+      }
+
+      .cta::after {
+        transition: none;
+      }
+
+      .reveal {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="bg-layer" aria-hidden="true"></div>
+    <div class="motion-streaks" aria-hidden="true"></div>
+    <div class="particles" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header>
+      <nav class="nav" aria-label="Primary">
+        <div class="logo" aria-label="i88">i88</div>
+        <div class="nav-links">
+          <a href="#how">How it works</a>
+          <a href="#faq">FAQ</a>
+          <a href="#links">Links</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-copy reveal">
+          <div class="badge-row">
+            <span class="badge">Official Updates Hub</span>
+            <span class="badge">Since 2016</span>
+            <span class="badge">MY / SG</span>
+            <span class="badge">Guided Access</span>
+          </div>
+          <h1>Explore first — decide later 👀</h1>
+          <p>Tap your region to view updates, event info, and access steps.</p>
+          <div class="mini-cards" aria-label="Highlights">
+            <div class="mini-card">
+              <strong>📰 Updates</strong>
+              <span>Announcements & schedules</span>
+            </div>
+            <div class="mini-card">
+              <strong>🎁 Event Info</strong>
+              <span>How tickets & rewards work</span>
+            </div>
+            <div class="mini-card">
+              <strong>⚽ Sports Vibes</strong>
+              <span>Match highlights & weekly picks</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="bulletin" aria-live="polite">
+            <div class="bulletin-header">
+              <span>Today’s Bulletin (Live)</span>
+              <span class="live-dot" aria-hidden="true"></span>
+            </div>
+            <ul class="bulletin-lines" id="bulletin-lines">
+              <li class="active">Christmas Monopoly mini-game is ongoing</li>
+              <li>Tickets unlock chances for premium gifts</li>
+              <li>Event ends: 1 Jan 2026</li>
+              <li>Choose MY / SG for local updates</li>
+            </ul>
+          </div>
+          <div class="cta-panel" aria-label="Regional selection">
+            <div class="cta-row">
+              <a class="cta magnetic" id="cta-my" href="#" target="_blank" rel="noopener" aria-label="Open i88 MY Page">
+                <span>Open i88 MY Page</span>
+                <small>MY updates + event schedule</small>
+              </a>
+              <a class="cta cta-secondary magnetic" id="cta-sg" href="#" target="_blank" rel="noopener" aria-label="Open i88 SG Page">
+                <span>Open i88 SG Page</span>
+                <small>SG updates + event schedule</small>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="how">
+        <div>
+          <h2 class="section-title">How it works (2 steps)</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <strong>1. Register</strong>
+              <p>Start with the regional page that fits your location.</p>
+            </div>
+            <div class="timeline-item">
+              <strong>2. Collect tickets</strong>
+              <p>Tickets are used for event participation and reward chances.</p>
+            </div>
+          </div>
+        </div>
+        <div class="note">Tip: Always read promo/event details before joining ✅</div>
+        <div class="faq" id="faq">
+          <details>
+            <summary>Is this an official page?</summary>
+            <p>Yes, this is our updates hub to guide new visitors.</p>
+          </details>
+          <details>
+            <summary>How do tickets work?</summary>
+            <p>Tickets are used for event participation and reward chances.</p>
+          </details>
+          <details>
+            <summary>Where can I see full promo details?</summary>
+            <p>Use Promotions/Event links below.</p>
+          </details>
+        </div>
+      </section>
+
+      <footer id="links">
+        <a href="#" aria-label="Promotions">Promotions</a>
+        <a href="#" aria-label="Event">Event</a>
+        <a href="#" aria-label="Support">Support</a>
+        <a href="#" aria-label="Terms">Terms</a>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const MY_PAGE_URL = 'https://www.facebook.com/profile.php?id=61584225863316';
+    const SG_PAGE_URL = 'https://www.facebook.com/profile.php?id=61584669658907';
+
+    const ctaMy = document.getElementById('cta-my');
+    const ctaSg = document.getElementById('cta-sg');
+    ctaMy.href = MY_PAGE_URL;
+    ctaSg.href = SG_PAGE_URL;
+
+    const magneticButtons = document.querySelectorAll('.magnetic');
+    magneticButtons.forEach((button) => {
+      button.addEventListener('mousemove', (event) => {
+        const rect = button.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        button.style.transform = `translate(${x * 0.12}px, ${y * 0.12}px)`;
+      });
+
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = 'translate(0px, 0px)';
+      });
+    });
+
+    const bgLayer = document.querySelector('.bg-layer');
+    window.addEventListener('mousemove', (event) => {
+      const x = (event.clientX / window.innerWidth - 0.5) * 12;
+      const y = (event.clientY / window.innerHeight - 0.5) * 12;
+      bgLayer.style.setProperty('--parallax-x', `${x}px`);
+      bgLayer.style.setProperty('--parallax-y', `${y}px`);
+    });
+
+    const lines = document.querySelectorAll('#bulletin-lines li');
+    let lineIndex = 0;
+    setInterval(() => {
+      lines[lineIndex].classList.remove('active');
+      lineIndex = (lineIndex + 1) % lines.length;
+      lines[lineIndex].classList.add('active');
+    }, 3000);
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    reveals.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>
